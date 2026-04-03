@@ -1,7 +1,7 @@
 # מעגל הגברים - Progress
 
-## Status: Active - Hub Integration Complete
-## Last Updated: 2026-04-01
+## Status: Active - Live & Enhanced
+## Last Updated: 2026-04-03
 
 ## Current State
 Landing page fully built and upgraded. Form connected to FormSubmit.co (real email delivery to eladjak@gmail.com). WhatsApp floating CTA added. SEO files (robots.txt, sitemap.xml) generated. Hub integration configured - `circle.eladjak.com` subdomain ready. Build passes with 0 errors, 6 routes.
@@ -21,6 +21,16 @@ Landing page fully built and upgraded. Form connected to FormSubmit.co (real ema
 - [x] **Footer links** — Added eladjak.com and Facebook links to footer
 - [x] **TypeScript: ZERO errors**
 - [x] **Production build: SUCCESS** (6 routes: /, /_not-found, /robots.txt, /sitemap.xml)
+
+### Session 3 (2026-04-03) - Enhancements & Polish
+- [x] **Form email updated** — Routed to eladjak.agents@gmail.com (agents email)
+- [x] **Social proof section** — 3 testimonials from participants with stagger animations
+- [x] **Urgency counter** — "3 מקומות נותרו מתוך 10" with progress bar (was just "10 בלבד")
+- [x] **JSON-LD Structured Data** — schema.org Service + Person for Hebrew SEO
+- [x] **Vercel Analytics** — @vercel/analytics integrated
+- [x] **FAQ animation** — AnimatePresence smooth open/close
+- [x] **TypeScript: ZERO errors**
+- [x] **Production build: SUCCESS**
 
 ### Session 1 (2026-02-26) - Initial Build
 - [x] Next.js 16.1.6 initialized (TypeScript + Tailwind v4 + App Router)
