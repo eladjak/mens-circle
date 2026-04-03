@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Heebo } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 
@@ -61,6 +62,42 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "מעגל גברים - מסע ללב הגבריות",
+  description:
+    "מעגל גברים עם אלעד יעקובוביץ' - מרחב בטוח לגברים לבטא רגשות, לצמוח ולהתחבר",
+  url: siteUrl,
+  image: `${siteUrl}/hero.jpg`,
+  provider: {
+    "@type": "Person",
+    name: "אלעד יעקובוביץ'",
+    url: "https://www.eladjak.com",
+    sameAs: [
+      "https://www.facebook.com/eladjak1",
+      "https://www.ohlove.co.il",
+    ],
+    jobTitle: "מנחה מעגלי גברים",
+  },
+  areaServed: [
+    {
+      "@type": "City",
+      name: "מגדל העמק",
+    },
+    {
+      "@type": "Country",
+      name: "ישראל",
+    },
+  ],
+  serviceType: "מעגל גברים",
+  offers: {
+    "@type": "Offer",
+    availability: "https://schema.org/LimitedAvailability",
+    description: "10 משתתפים בלבד",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -68,9 +105,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="he" dir="rtl">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`${heebo.variable} font-heebo antialiased`}>
         {children}
         <WhatsAppFloat />
+        <Analytics />
       </body>
     </html>
   );

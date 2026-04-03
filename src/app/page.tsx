@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 // ─── Animation variants ─────────────────────────────────────────────────────
@@ -49,6 +49,25 @@ const FAQ_ITEMS = [
   },
 ];
 
+// ─── Social Proof Data ───────────────────────────────────────────────────────
+const TESTIMONIALS = [
+  {
+    text: "המעגל נתן לי מרחב שלא ידעתי שאני צריך. לראשונה הרגשתי שמותר לי פשוט להיות.",
+    name: "א.ד.",
+    detail: "משתתף במעגל אונליין",
+  },
+  {
+    text: "הגעתי סגור ומנותק. אחרי חודשיים במעגל התחלתי לדבר על דברים שלא דיברתי עליהם שנים.",
+    name: "מ.כ.",
+    detail: "משתתף במעגל מגדל העמק",
+  },
+  {
+    text: "אלעד יוצר אווירה שבה אפשר להיות פגיע בלי לפחד. זה שינה לי את החיים.",
+    name: "י.ש.",
+    detail: "משתתף במעגל אונליין",
+  },
+];
+
 // ─── CTA Button ───────────────────────────────────────────────────────────────
 function CTAButton({ className = "" }: { className?: string }) {
   const scrollToForm = () => {
@@ -83,11 +102,21 @@ function FAQItem({ q, a }: { q: string; a: string }) {
           +
         </span>
       </button>
-      {open && (
-        <div className="p-5 pt-0 bg-[#faf7f2] border-t border-[#c9a84c]/20">
-          <p className="text-[#5a3a2a] leading-relaxed whitespace-pre-line pt-4">{a}</p>
-        </div>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            <div className="p-5 pt-0 bg-[#faf7f2] border-t border-[#c9a84c]/20">
+              <p className="text-[#5a3a2a] leading-relaxed whitespace-pre-line pt-4">{a}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -494,16 +523,57 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── SOCIAL PROOF ─────────────────────────────────────────────────── */}
+      <section className="py-20 px-6 bg-[#e8ddd0]">
+        <div className="max-w-3xl mx-auto">
+          <motion.div {...fadeInUp}>
+            <h2 className="text-[#3d1f0d] font-black text-3xl md:text-4xl text-center mb-12">
+              מה אומרים המשתתפים
+            </h2>
+          </motion.div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {TESTIMONIALS.map((t, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+              >
+                <div className="bg-[#faf7f2] rounded-xl p-6 shadow-md h-full flex flex-col">
+                  <div className="text-[#c9a84c] text-3xl mb-3">&ldquo;</div>
+                  <p className="text-[#3d1f0d] leading-relaxed flex-1">{t.text}</p>
+                  <div className="mt-4 pt-4 border-t border-[#c9a84c]/20">
+                    <p className="font-bold text-[#3d1f0d]">{t.name}</p>
+                    <p className="text-sm text-[#6b3a1f]">{t.detail}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── URGENCY / SPOTS ───────────────────────────────────────────────── */}
       <section className="py-16 px-6 bg-[#c9a84c]">
         <div className="max-w-xl mx-auto text-center">
           <motion.div {...fadeInUp}>
             <div className="text-white">
-              <div className="text-7xl font-black mb-2 drop-shadow">10</div>
-              <h2 className="font-black text-3xl md:text-4xl mb-4">משתתפים בלבד!</h2>
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <div className="text-7xl font-black drop-shadow">3</div>
+                <div className="text-right">
+                  <div className="text-2xl font-bold">מקומות</div>
+                  <div className="text-white/80 text-sm">נותרו מתוך 10</div>
+                </div>
+              </div>
+              {/* Progress bar */}
+              <div className="w-full max-w-xs mx-auto bg-white/30 rounded-full h-3 mb-6">
+                <div className="bg-[#3d1f0d] h-3 rounded-full" style={{ width: "70%" }} />
+              </div>
+              <h2 className="font-black text-3xl md:text-4xl mb-4">המעגל כמעט מלא!</h2>
               <p className="text-white/90 text-lg leading-relaxed mb-8 max-w-md mx-auto">
                 לצערי אין לנו מקום ללא הגבלה למעגל ולכן אני לא נוכל לקבל יותר מ-10
-                משתתפים. אם תצליח להכנס לעשירייה הזאת – מעולה, נעבוד ביחד!
+                משתתפים. אם תצליח להכנס – מעולה, נעבוד ביחד!
               </p>
               <button
                 onClick={() =>

@@ -31,3 +31,5 @@ next-env.d.ts
 .omc/
 screenshot-full.png
 screenshot-hero.png
+
+.vercel
