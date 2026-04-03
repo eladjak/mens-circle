@@ -106,7 +106,7 @@ function LeadForm() {
     setLoading(true);
     setError(false);
     try {
-      const response = await fetch("https://formsubmit.co/ajax/eladjak@gmail.com", {
+      const response = await fetch("https://formsubmit.co/ajax/eladjak.agents@gmail.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
