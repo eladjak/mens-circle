@@ -453,7 +453,21 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <motion.div {...fadeInUpDelayed(300)} className="text-center mt-12">
+          {/* Video */}
+          <motion.div {...fadeInUpDelayed(300)} className="mt-12">
+            <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-2xl ring-1 ring-[#c9a84c]/20">
+              <iframe
+                src="https://www.youtube.com/embed/vrVgDtMdtkM"
+                title="מעגל גברים - מסע ללב הגבריות"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+                loading="lazy"
+              />
+            </div>
+          </motion.div>
+
+          <motion.div {...fadeInUpDelayed(350)} className="text-center mt-12">
             <CTAButton />
           </motion.div>
         </div>
