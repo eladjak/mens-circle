@@ -309,7 +309,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-white font-black text-5xl md:text-7xl leading-tight mb-4"
+            className="text-white font-black text-4xl md:text-7xl leading-tight mb-4"
           >
             מעגל גברים
           </motion.h1>
@@ -466,15 +466,15 @@ export default function Home() {
             <h2 className="text-[#3d1f0d] font-black text-3xl md:text-4xl text-center mb-10">
               מי אני?
             </h2>
-            <div className="flex flex-col md:flex-row gap-8 items-start">
+            <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
               {/* Profile photo */}
-              <div className="flex-shrink-0 mx-auto md:mx-0">
-                <div className="w-32 h-32 rounded-full overflow-hidden shadow-xl ring-4 ring-[#c9a84c]/30">
+              <div className="flex-shrink-0">
+                <div className="w-40 h-40 md:w-48 md:h-48 rounded-2xl overflow-hidden shadow-xl ring-4 ring-[#c9a84c]/30">
                   <Image
-                    src="/elad-profile.jpg"
+                    src="/elad-circle-portrait.jpg"
                     alt="אלעד יעקובוביץ' - מנחה מעגלי גברים"
-                    width={128}
-                    height={128}
+                    width={192}
+                    height={192}
                     className="w-full h-full object-cover"
                   />
                 </div>
