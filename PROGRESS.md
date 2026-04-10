@@ -1,7 +1,7 @@
 # מעגל הגברים - Progress
 
-## Status: Active - Live & Enhanced
-## Last Updated: 2026-04-03
+## Status: Active - Live & Polished
+## Last Updated: 2026-04-10
 
 ## Current State
 Landing page fully built and upgraded. Form connected to FormSubmit.co (real email delivery to eladjak@gmail.com). WhatsApp floating CTA added. SEO files (robots.txt, sitemap.xml) generated. Hub integration configured - `circle.eladjak.com` subdomain ready. Build passes with 0 errors, 6 routes.
@@ -21,6 +21,12 @@ Landing page fully built and upgraded. Form connected to FormSubmit.co (real ema
 - [x] **Footer links** — Added eladjak.com and Facebook links to footer
 - [x] **TypeScript: ZERO errors**
 - [x] **Production build: SUCCESS** (6 routes: /, /_not-found, /robots.txt, /sitemap.xml)
+
+### Session 4 (2026-04-10) - Profile Image + Mobile Fixes
+- [x] **Gemini portrait** — New warm portrait image of man in men's circle (1:1, 762KB)
+- [x] **Profile section upgrade** — Larger image (48x48 desktop), rounded-xl, centered mobile
+- [x] **Mobile hero fix** — Title text 4xl on mobile (was 5xl), prevents overflow
+- [x] **Build: SUCCESS**
 
 ### Session 3 (2026-04-03) - Enhancements & Polish
 - [x] **Form email updated** — Routed to eladjak.agents@gmail.com (agents email)
