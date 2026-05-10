@@ -346,6 +346,27 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── HERO VIDEO (Wave-12: moved to top for instant authority) ──────── */}
+      <section className="py-12 px-6 bg-[#1a0d06]">
+        <div className="max-w-3xl mx-auto">
+          <motion.div {...fadeInUp}>
+            <p className="text-center text-[#c9a84c] font-semibold mb-6 text-lg">
+              צפו בסרטון קצר — מי אני, מה זה מעגל גברים, ולמה זה חשוב
+            </p>
+            <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-2xl ring-2 ring-[#c9a84c]/30">
+              <iframe
+                src="https://www.youtube.com/embed/vrVgDtMdtkM"
+                title="מעגל גברים - מסע ללב הגבריות"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+                loading="lazy"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── EMOTIONAL HOOK ────────────────────────────────────────────────── */}
       <section className="py-20 px-6 bg-[#faf7f2]">
         <div className="max-w-2xl mx-auto">
@@ -453,20 +474,6 @@ export default function Home() {
             </p>
           </motion.div>
 
-          {/* Video */}
-          <motion.div {...fadeInUpDelayed(300)} className="mt-12">
-            <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-2xl ring-1 ring-[#c9a84c]/20">
-              <iframe
-                src="https://www.youtube.com/embed/vrVgDtMdtkM"
-                title="מעגל גברים - מסע ללב הגבריות"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full"
-                loading="lazy"
-              />
-            </div>
-          </motion.div>
-
           <motion.div {...fadeInUpDelayed(350)} className="text-center mt-12">
             <CTAButton />
           </motion.div>
@@ -485,7 +492,7 @@ export default function Home() {
               <div className="flex-shrink-0">
                 <div className="w-40 h-40 md:w-48 md:h-48 rounded-2xl overflow-hidden shadow-xl ring-4 ring-[#c9a84c]/30">
                   <Image
-                    src="/elad-circle-portrait.jpg"
+                    src="/elad-real.jpg"
                     alt="אלעד יעקובוביץ' - מנחה מעגלי גברים"
                     width={192}
                     height={192}
