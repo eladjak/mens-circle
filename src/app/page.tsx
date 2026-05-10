@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import FAQChat from "@/components/FAQChat";
 
 // ─── Animation variants ─────────────────────────────────────────────────────
 const fadeInUp = {
@@ -626,6 +627,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── INTERACTIVE CHAT — Wave-13 ────────────────────────────────────── */}
+      <FAQChat />
 
       {/* ── LEAD FORM ─────────────────────────────────────────────────────── */}
       <section id="lead-form" className="py-20 px-6 bg-[#3d1f0d]">
