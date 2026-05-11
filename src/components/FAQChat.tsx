@@ -20,7 +20,7 @@ export default function FAQChat() {
   const [loading, setLoading] = useState(false)
   const endRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => { endRef.current?.scrollIntoView({ behavior: "smooth" }) }, [messages, loading])
+  useEffect(() => { if (messages.length > 0) endRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }) }, [messages, loading])
 
   const send = async (text?: string) => {
     const q = (text ?? input).trim()
