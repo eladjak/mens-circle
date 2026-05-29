@@ -683,6 +683,14 @@ export default function Home() {
           >
             Facebook
           </a>
+          <a
+            href="/cv-elad-yaakobovitch-he.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#c9a84c]/50 hover:text-[#c9a84c] text-xs transition-colors"
+          >
+            קורות חיים
+          </a>
         </div>
         <p className="text-[#c9a84c]/40 text-xs mt-2">מעגל גברים – מסע ללב הגבריות</p>
       </footer>
