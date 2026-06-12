@@ -1,12 +1,23 @@
 # מעגל הגברים - Progress
 
-## Status: Active - Live & Polished
-## Last Updated: 2026-04-10
+## Status: Active - Live & Polished (GEO 100/100)
+## Last Updated: 2026-06-13
 
 ## Current State
-Landing page fully built and upgraded. Form connected to FormSubmit.co (real email delivery to eladjak@gmail.com). WhatsApp floating CTA added. SEO files (robots.txt, sitemap.xml) generated. Hub integration configured - `circle.eladjak.com` subdomain ready. Build passes with 0 errors, 6 routes.
+Live at circle.eladjak.com (+ community.eladjak.com alias), 200 OK. GEO/AEO **100/100** (self-scan). Interactive sticky nav, useful AI-chat fallback, אמל"ק/TL;DR card. Build/typecheck/lint all green. Form → FormSubmit.co. WhatsApp float. Production deploy verified Ready.
 
 ## What Was Done
+
+### Session 5 (2026-06-13) - GEO 59→100, Interactivity, Chat Fallback (Shabbat deep-iteration)
+- [x] **GEO/AEO 59→100/100** — 5-schema JSON-LD bundle (WebSite + Person + ProfessionalService + WebPage + FAQPage), llms.txt added, semantic tags (nav/header/article), <h4> heading hierarchy, ≥5 external citation links in <main>, visible אודות link
+- [x] **SiteNav** (`src/components/SiteNav.tsx`) — sticky top nav, smooth-scroll anchor links (אודות/מה זה מעגל/המלצות/שאלות/הצטרפות), mobile hamburger, scroll-aware bg. Real navigation/interaction (web-paradigm)
+- [x] **chat-faq fallback rewrite** — deterministic keyword-routed answers (price/timing/fit/format/sessions/therapy/discretion) so the chat is genuinely useful even WITHOUT GEMINI_API_KEY (was a dead "still in beta" message). Model fixed → gemini-flash-latest (2.5-flash 404 per network note)
+- [x] **אמל"ק / TL;DR card** at top (content-playbook: lead with the gist — שעתיים/10 משתתפים/אונליין-מגדל/פגישה ראשונה חינם)
+- [x] **Real verified ohlove.co.il deep links** (/men, /amlatsot, /blog) — no dead URLs (checked /about was 404, replaced)
+- [x] **Gates green** — tsc 0, next build 0, eslint 0. Branch→Vercel preview (Ready)→merge master→prod (Ready, 200). Live GEO re-scan 100/100
+- [ ] **Elad action:** set `GEMINI_API_KEY` env in Vercel project to switch chat from deterministic fallback to live Gemini answers (chat already works either way)
+
+### Prior Sessions
 
 ### Session 2 (2026-04-01) - Hub Integration + Form + SEO + WhatsApp
 - [x] **Lead form connected to FormSubmit.co** — Real email delivery to eladjak@gmail.com with track info (online/migdal haemek)
