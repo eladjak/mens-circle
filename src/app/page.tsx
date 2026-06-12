@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import FAQChat from "@/components/FAQChat";
+import SiteNav from "@/components/SiteNav";
 
 // ─── Animation variants ─────────────────────────────────────────────────────
 const fadeInUp = {
@@ -284,6 +285,7 @@ function LeadForm() {
 export default function Home() {
   return (
     <main className="min-h-dvh bg-[#faf7f2] text-[#2c1810]">
+      <SiteNav />
       {/* ── HERO ──────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[90dvh] flex flex-col items-center justify-center overflow-hidden bg-[#2c1810]">
         {/* Hero background image */}
@@ -368,6 +370,38 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── אמל"ק / TL;DR CARD (content-playbook: lead with the gist) ──────── */}
+      <section className="py-12 px-6 bg-[#faf7f2]">
+        <div className="max-w-2xl mx-auto">
+          <motion.div
+            {...fadeInUp}
+            className="bg-white rounded-2xl shadow-lg border border-[#c9a84c]/25 p-6 md:p-8"
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-[#c9a84c] text-2xl" aria-hidden="true">●</span>
+              <h3 className="text-[#3d1f0d] font-black text-xl md:text-2xl">בקצרה — מה זה ולמי זה</h3>
+            </div>
+            <p className="text-[#5a3a2a] text-lg leading-relaxed mb-5">
+              מעגל גברים אינטימי בהנחיית <strong className="text-[#3d1f0d]">אלעד יעקובוביץ&apos;</strong>{" "}
+              (מבית אומנות הקשר) — מרחב בטוח לדבר באמת, להוריד את המסכה ולצמוח עם עוד גברים שבאותו מסע.
+            </p>
+            <ul className="grid sm:grid-cols-2 gap-3 text-[#5a3a2a]">
+              {[
+                "מפגש שבועי של שעתיים",
+                "10 משתתפים בלבד",
+                "אונליין או מגדל העמק",
+                "פגישת היכרות ראשונה — חינם",
+              ].map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <span className="text-[#c9a84c] font-black mt-0.5 flex-shrink-0" aria-hidden="true">✓</span>
+                  <span className="font-semibold">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── EMOTIONAL HOOK ────────────────────────────────────────────────── */}
       <section className="py-20 px-6 bg-[#faf7f2]">
         <div className="max-w-2xl mx-auto">
@@ -400,7 +434,7 @@ export default function Home() {
       </section>
 
       {/* ── WHAT IS A MEN'S CIRCLE ────────────────────────────────────────── */}
-      <section className="py-20 px-6 bg-[#3d1f0d]">
+      <section id="what-is" className="py-20 px-6 bg-[#3d1f0d] scroll-mt-16">
         <div className="max-w-2xl mx-auto">
           <motion.div {...fadeInUp}>
             <h2 className="text-[#c9a84c] font-black text-3xl md:text-4xl text-center mb-12">
@@ -482,7 +516,7 @@ export default function Home() {
       </section>
 
       {/* ── WHO AM I ──────────────────────────────────────────────────────── */}
-      <section className="py-20 px-6 bg-[#faf7f2]">
+      <section id="about" className="py-20 px-6 bg-[#faf7f2] scroll-mt-16">
         <div className="max-w-2xl mx-auto">
           <motion.div {...fadeInUp}>
             <h2 className="text-[#3d1f0d] font-black text-3xl md:text-4xl text-center mb-10">
@@ -521,6 +555,31 @@ export default function Home() {
                   <strong className="text-[#c9a84c] text-xl">440 (!!!)</strong> זוגות ועזרתי להם
                   לבנות זוגיות מאושרת ויציבה!
                 </p>
+                <div className="pt-2">
+                  <h4 className="font-bold text-[#3d1f0d] mb-2 text-base">קצת רקע והכשרה</h4>
+                  <p className="text-base text-[#6b3a1f]">
+                    מנחה קבוצות ומעגלי גברים, מטפל ומנטור עם שנים של ניסיון בליווי, הדרכה והנחייה.
+                    בכובעי השני אני מנהל ובעלים של{" "}
+                    <a
+                      href="https://www.ohlove.co.il/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#c9a84c] hover:text-[#b8943c] font-bold underline underline-offset-2 transition-colors"
+                    >
+                      אומנות הקשר
+                    </a>{" "}
+                    ומפרסם תכנים ב
+                    <a
+                      href="https://www.eladjak.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#c9a84c] hover:text-[#b8943c] font-bold underline underline-offset-2 transition-colors"
+                    >
+                      אתר האישי שלי
+                    </a>
+                    .
+                  </p>
+                </div>
                 <div className="flex gap-4 flex-wrap pt-2">
                   <a
                     href="https://www.ohlove.co.il/"
@@ -539,6 +598,53 @@ export default function Home() {
                     👤 פייסבוק
                   </a>
                 </div>
+
+                {/* Sources & related links (citation signal + real navigation) */}
+                <div className="pt-4 mt-2 border-t border-[#c9a84c]/20">
+                  <h4 className="font-bold text-[#3d1f0d] mb-2 text-sm">אודות וקישורים נוספים</h4>
+                  <ul className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm">
+                    <li>
+                      <a
+                        href="https://www.eladjak.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#6b3a1f] hover:text-[#c9a84c] underline underline-offset-2 transition-colors"
+                      >
+                        אודות אלעד
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.ohlove.co.il/men"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#6b3a1f] hover:text-[#c9a84c] underline underline-offset-2 transition-colors"
+                      >
+                        עוד על עבודה עם גברים
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.ohlove.co.il/amlatsot"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#6b3a1f] hover:text-[#c9a84c] underline underline-offset-2 transition-colors"
+                      >
+                        המלצות וחוות דעת
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="https://www.ohlove.co.il/blog"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#6b3a1f] hover:text-[#c9a84c] underline underline-offset-2 transition-colors"
+                      >
+                        מאמרים בנושא זוגיות ויחסים
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -546,7 +652,7 @@ export default function Home() {
       </section>
 
       {/* ── SOCIAL PROOF ─────────────────────────────────────────────────── */}
-      <section className="py-20 px-6 bg-[#e8ddd0]">
+      <section id="testimonials" className="py-20 px-6 bg-[#e8ddd0] scroll-mt-16">
         <div className="max-w-3xl mx-auto">
           <motion.div {...fadeInUp}>
             <h2 className="text-[#3d1f0d] font-black text-3xl md:text-4xl text-center mb-12">
@@ -562,14 +668,14 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
               >
-                <div className="bg-[#faf7f2] rounded-xl p-6 shadow-md h-full flex flex-col">
-                  <div className="text-[#c9a84c] text-3xl mb-3">&ldquo;</div>
+                <article className="bg-[#faf7f2] rounded-xl p-6 shadow-md h-full flex flex-col">
+                  <div className="text-[#c9a84c] text-3xl mb-3" aria-hidden="true">&ldquo;</div>
                   <p className="text-[#3d1f0d] leading-relaxed flex-1">{t.text}</p>
-                  <div className="mt-4 pt-4 border-t border-[#c9a84c]/20">
+                  <footer className="mt-4 pt-4 border-t border-[#c9a84c]/20">
                     <p className="font-bold text-[#3d1f0d]">{t.name}</p>
                     <p className="text-sm text-[#6b3a1f]">{t.detail}</p>
-                  </div>
-                </div>
+                  </footer>
+                </article>
               </motion.div>
             ))}
           </div>
@@ -611,7 +717,7 @@ export default function Home() {
       </section>
 
       {/* ── FAQ ───────────────────────────────────────────────────────────── */}
-      <section className="py-20 px-6 bg-[#faf7f2]">
+      <section id="faq" className="py-20 px-6 bg-[#faf7f2] scroll-mt-16">
         <div className="max-w-2xl mx-auto">
           <motion.div {...fadeInUp}>
             <h2 className="text-[#3d1f0d] font-black text-3xl md:text-4xl text-center mb-12">
@@ -632,7 +738,7 @@ export default function Home() {
       <FAQChat />
 
       {/* ── LEAD FORM ─────────────────────────────────────────────────────── */}
-      <section id="lead-form" className="py-20 px-6 bg-[#3d1f0d]">
+      <section id="lead-form" className="py-20 px-6 bg-[#3d1f0d] scroll-mt-16">
         <div className="max-w-lg mx-auto">
           <motion.div {...fadeInUp}>
             <div className="text-center mb-8">
