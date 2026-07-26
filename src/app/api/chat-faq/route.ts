@@ -78,8 +78,9 @@ export async function POST(req: Request) {
   // Gemini key himself. Over either limit we serve the deterministic fallback
   // rather than an error — the visitor still gets a real answer, it just doesn't
   // cost anything. Checked after body validation so junk traffic can't burn budget.
-  if (!aiGuard(req).ok) {
-    return NextResponse.json({ content: localFallback(messages) })
+  const _guard = await aiGuard(req, "mens-circle");
+  if (!_guard.ok) {
+    return NextResponse.json({ content: "העוזר עמוס כרגע — אפשר לנסות שוב מאוחר יותר, או להשאיר פרטים בטופס ונחזור אליכם." });
   }
 
   const apiKey = process.env.GEMINI_API_KEY
