@@ -137,6 +137,10 @@ function LeadForm() {
   // nothing at all — silence for everyone, and an empty email to Elad.
   type FieldErrors = { name?: string; email?: string; phone?: string };
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  // Always mounted, empty until needed. A live region injected into the DOM at
+  // the same instant as its text is frequently not announced at all, so the
+  // region has to exist before the message arrives.
+  const [errorSummary, setErrorSummary] = useState("");
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
@@ -160,12 +164,20 @@ function LeadForm() {
     const errs = validate();
     setFieldErrors(errs);
     if (Object.keys(errs).length > 0) {
-      // Move focus to the first invalid field, in the order they appear.
+      // Visual order, not Object.keys order.
+      const labels: string[] = [];
+      if (errs.name) labels.push("שם מלא");
+      if (errs.email) labels.push("מייל");
+      if (errs.phone) labels.push("נייד");
+      setErrorSummary(
+        `הטופס לא נשלח. יש לתקן ${labels.length === 1 ? "שדה אחד" : `${labels.length} שדות`}: ${labels.join(", ")}.`,
+      );
       const first = errs.name ? nameRef : errs.email ? emailRef : phoneRef;
       first.current?.focus();
       return;
     }
 
+    setErrorSummary("");
     setLoading(true);
     setError(false);
     try {
@@ -212,6 +224,11 @@ function LeadForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+      {/* Mounted on every render, empty until a submit fails, so the region is
+          already present when the message lands in it. */}
+      <div aria-live="assertive" className="sr-only">
+        {errorSummary}
+      </div>
       {/* Track toggle */}
       <div className="flex gap-2 bg-[#e8ddd0] rounded-lg p-1 mb-6">
         <button
@@ -270,7 +287,7 @@ function LeadForm() {
           }`}
         />
         {fieldErrors.name && (
-          <p id="name-error" role="alert" className="mt-1 text-sm font-bold text-[#b3261e]">
+          <p id="name-error" className="mt-1 text-sm font-bold text-[#b3261e]">
             <span aria-hidden="true">⚠ </span>
             {fieldErrors.name}
           </p>
@@ -299,7 +316,7 @@ function LeadForm() {
           dir="ltr"
         />
         {fieldErrors.email && (
-          <p id="email-error" role="alert" className="mt-1 text-sm font-bold text-[#b3261e]">
+          <p id="email-error" className="mt-1 text-sm font-bold text-[#b3261e]">
             <span aria-hidden="true">⚠ </span>
             {fieldErrors.email}
           </p>
@@ -328,7 +345,7 @@ function LeadForm() {
           dir="ltr"
         />
         {fieldErrors.phone && (
-          <p id="phone-error" role="alert" className="mt-1 text-sm font-bold text-[#b3261e]">
+          <p id="phone-error" className="mt-1 text-sm font-bold text-[#b3261e]">
             <span aria-hidden="true">⚠ </span>
             {fieldErrors.phone}
           </p>
