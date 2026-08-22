@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import FAQChat from "@/components/FAQChat";
@@ -132,8 +132,40 @@ function LeadForm() {
 
   const [error, setError] = useState(false);
 
+  // The form carries noValidate, so the browser does none of this for us.
+  // Without it, pressing "שלח" on an empty form posted an empty lead and said
+  // nothing at all — silence for everyone, and an empty email to Elad.
+  type FieldErrors = { name?: string; email?: string; phone?: string };
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+
+  const validate = (): FieldErrors => {
+    const errs: FieldErrors = {};
+    if (!formData.name.trim()) errs.name = "צריך למלא שם מלא";
+    if (!formData.email.trim()) errs.email = "צריך למלא כתובת מייל";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(formData.email.trim()))
+      errs.email = "כתובת המייל לא נראית תקינה, אפשר לבדוק שוב?";
+    const digits = formData.phone.replace(/\D/g, "");
+    if (!formData.phone.trim()) errs.phone = "צריך למלא מספר נייד";
+    else if (digits.length < 9 || digits.length > 10)
+      errs.phone = "מספר הנייד צריך להיות 9 או 10 ספרות";
+    return errs;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    const errs = validate();
+    setFieldErrors(errs);
+    if (Object.keys(errs).length > 0) {
+      // Move focus to the first invalid field, in the order they appear.
+      const first = errs.name ? nameRef : errs.email ? emailRef : phoneRef;
+      first.current?.focus();
+      return;
+    }
+
     setLoading(true);
     setError(false);
     try {
@@ -166,8 +198,8 @@ function LeadForm() {
 
   if (submitted) {
     return (
-      <div className="text-center py-10">
-        <div className="text-5xl mb-4">✅</div>
+      <div className="text-center py-10" role="status">
+        <div className="text-5xl mb-4" aria-hidden="true">✅</div>
         <h3 className="text-2xl font-black text-[#c9a84c] mb-3">
           תודה, {formData.name}!
         </h3>
@@ -225,11 +257,24 @@ function LeadForm() {
           id="name"
           type="text"
           required
+          ref={nameRef}
           placeholder="הכנס שם מלא"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className="w-full border-2 border-[#c9a84c]/40 rounded-lg px-4 py-3 text-[#3d1f0d] bg-white focus:border-[#c9a84c] focus:outline-none transition-colors"
+          aria-invalid={fieldErrors.name ? true : undefined}
+          aria-describedby={fieldErrors.name ? "name-error" : undefined}
+          className={`w-full border-2 rounded-lg px-4 py-3 text-[#3d1f0d] bg-white focus:outline-none transition-colors ${
+            fieldErrors.name
+              ? "border-[#b3261e] focus:border-[#b3261e]"
+              : "border-[#c9a84c]/40 focus:border-[#c9a84c]"
+          }`}
         />
+        {fieldErrors.name && (
+          <p id="name-error" role="alert" className="mt-1 text-sm font-bold text-[#b3261e]">
+            <span aria-hidden="true">⚠ </span>
+            {fieldErrors.name}
+          </p>
+        )}
       </div>
 
       <div>
@@ -240,12 +285,25 @@ function LeadForm() {
           id="email"
           type="email"
           required
+          ref={emailRef}
           placeholder="your@email.com"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="w-full border-2 border-[#c9a84c]/40 rounded-lg px-4 py-3 text-[#3d1f0d] bg-white focus:border-[#c9a84c] focus:outline-none transition-colors"
+          aria-invalid={fieldErrors.email ? true : undefined}
+          aria-describedby={fieldErrors.email ? "email-error" : undefined}
+          className={`w-full border-2 rounded-lg px-4 py-3 text-[#3d1f0d] bg-white focus:outline-none transition-colors ${
+            fieldErrors.email
+              ? "border-[#b3261e] focus:border-[#b3261e]"
+              : "border-[#c9a84c]/40 focus:border-[#c9a84c]"
+          }`}
           dir="ltr"
         />
+        {fieldErrors.email && (
+          <p id="email-error" role="alert" className="mt-1 text-sm font-bold text-[#b3261e]">
+            <span aria-hidden="true">⚠ </span>
+            {fieldErrors.email}
+          </p>
+        )}
       </div>
 
       <div>
@@ -256,16 +314,30 @@ function LeadForm() {
           id="phone"
           type="tel"
           required
+          ref={phoneRef}
           placeholder="050-0000000"
           value={formData.phone}
           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-          className="w-full border-2 border-[#c9a84c]/40 rounded-lg px-4 py-3 text-[#3d1f0d] bg-white focus:border-[#c9a84c] focus:outline-none transition-colors"
+          aria-invalid={fieldErrors.phone ? true : undefined}
+          aria-describedby={fieldErrors.phone ? "phone-error" : undefined}
+          className={`w-full border-2 rounded-lg px-4 py-3 text-[#3d1f0d] bg-white focus:outline-none transition-colors ${
+            fieldErrors.phone
+              ? "border-[#b3261e] focus:border-[#b3261e]"
+              : "border-[#c9a84c]/40 focus:border-[#c9a84c]"
+          }`}
           dir="ltr"
         />
+        {fieldErrors.phone && (
+          <p id="phone-error" role="alert" className="mt-1 text-sm font-bold text-[#b3261e]">
+            <span aria-hidden="true">⚠ </span>
+            {fieldErrors.phone}
+          </p>
+        )}
       </div>
 
       {error && (
-        <p className="text-red-600 text-sm text-center bg-red-50 rounded-lg p-3">
+        <p role="alert" className="text-[#b3261e] font-bold text-sm text-center bg-red-50 rounded-lg p-3">
+          <span aria-hidden="true">⚠ </span>
           אירעה שגיאה בשליחה. אפשר לנסות שוב או לשלוח הודעה בוואטסאפ.
         </p>
       )}
