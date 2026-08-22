@@ -60,7 +60,7 @@ export default function FAQChat() {
         <div className="rounded-2xl shadow-2xl overflow-hidden bg-[#2c1810] border border-[#c9a84c]/20">
           <div className="px-5 py-4 overflow-y-auto space-y-3" style={{ minHeight: "300px", maxHeight: "400px" }}>
             {messages.length === 0 && !loading && (
-              <div className="text-center py-6 text-[#e8ddd0]/40 text-sm">בחר שאלה למטה או כתוב את שלך</div>
+              <div className="text-center py-6 text-[#e8ddd0]/60 text-sm">בחר שאלה למטה או כתוב את שלך</div>
             )}
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
@@ -108,8 +108,9 @@ export default function FAQChat() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="כתוב שאלה..."
+              aria-label="כתוב שאלה"
               disabled={loading}
-              className="flex-1 bg-transparent outline-none text-sm text-[#e8ddd0] placeholder:text-[#e8ddd0]/30"
+              className="flex-1 bg-transparent outline-none text-sm text-[#e8ddd0] placeholder:text-[#e8ddd0]/60"
             />
             <button
               type="submit"

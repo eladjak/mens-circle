@@ -78,7 +78,7 @@ function CTAButton({ className = "" }: { className?: string }) {
   return (
     <button
       onClick={scrollToForm}
-      className={`inline-block bg-[#c9a84c] hover:bg-[#b8943c] active:scale-95 text-white font-black text-lg md:text-xl px-8 py-4 rounded-lg shadow-lg transition-all duration-150 cursor-pointer select-none ${className}`}
+      className={`inline-block bg-[#c9a84c] hover:bg-[#b8943c] active:scale-95 text-[#2c1810] font-black text-lg md:text-xl px-8 py-4 rounded-lg shadow-lg transition-all duration-150 cursor-pointer select-none ${className}`}
     >
       כן אלעד! אני מעוניין לשמוע עוד!
     </button>
@@ -97,7 +97,7 @@ function FAQItem({ q, a }: { q: string; a: string }) {
       >
         <span className="font-bold text-[#3d1f0d] text-base md:text-lg">{q}</span>
         <span
-          className="text-[#c9a84c] text-2xl font-light flex-shrink-0 mr-3 transition-transform duration-200"
+          className="text-[#8a6a17] text-2xl font-light flex-shrink-0 mr-3 transition-transform duration-200"
           style={{ transform: open ? "rotate(45deg)" : "rotate(0deg)" }}
           aria-hidden="true"
         >
@@ -273,7 +273,7 @@ function LeadForm() {
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-[#c9a84c] hover:bg-[#b8943c] disabled:opacity-60 active:scale-95 text-white font-black text-xl py-4 rounded-lg shadow-lg transition-all duration-150 cursor-pointer mt-2"
+        className="w-full bg-[#c9a84c] hover:bg-[#b8943c] disabled:opacity-60 active:scale-95 text-[#2c1810] font-black text-xl py-4 rounded-lg shadow-lg transition-all duration-150 cursor-pointer mt-2"
       >
         {loading ? "שולח..." : "כן אלעד! אני מעוניין לשמוע עוד!"}
       </button>
@@ -378,7 +378,7 @@ export default function Home() {
             className="bg-white rounded-2xl shadow-lg border border-[#c9a84c]/25 p-6 md:p-8"
           >
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-[#c9a84c] text-2xl" aria-hidden="true">●</span>
+              <span className="text-[#8a6a17] text-2xl" aria-hidden="true">●</span>
               <h3 className="text-[#3d1f0d] font-black text-xl md:text-2xl">בקצרה — מה זה ולמי זה</h3>
             </div>
             <p className="text-[#5a3a2a] text-lg leading-relaxed mb-5">
@@ -393,7 +393,7 @@ export default function Home() {
                 "פגישת היכרות ראשונה — חינם",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-2">
-                  <span className="text-[#c9a84c] font-black mt-0.5 flex-shrink-0" aria-hidden="true">✓</span>
+                  <span className="text-[#8a6a17] font-black mt-0.5 flex-shrink-0" aria-hidden="true">✓</span>
                   <span className="font-semibold">{item}</span>
                 </li>
               ))}
@@ -544,7 +544,7 @@ export default function Home() {
                     href="https://www.ohlove.co.il/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#c9a84c] hover:text-[#b8943c] font-bold underline underline-offset-2 transition-colors"
+                    className="text-[#8a6a17] hover:text-[#6d5312] font-bold underline underline-offset-2 transition-colors"
                   >
                     &apos;אומנות הקשר&apos;
                   </a>
@@ -552,7 +552,7 @@ export default function Home() {
                 </p>
                 <p>
                   משנת 2010 זכיתי לחתן יותר מ-{" "}
-                  <strong className="text-[#c9a84c] text-xl">440 (!!!)</strong> זוגות ועזרתי להם
+                  <strong className="text-[#8a6a17] text-xl">440 (!!!)</strong> זוגות ועזרתי להם
                   לבנות זוגיות מאושרת ויציבה!
                 </p>
                 <div className="pt-2">
@@ -564,7 +564,7 @@ export default function Home() {
                       href="https://www.ohlove.co.il/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#c9a84c] hover:text-[#b8943c] font-bold underline underline-offset-2 transition-colors"
+                      className="text-[#8a6a17] hover:text-[#6d5312] font-bold underline underline-offset-2 transition-colors"
                     >
                       אומנות הקשר
                     </a>{" "}
@@ -573,7 +573,7 @@ export default function Home() {
                       href="https://www.eladjak.com/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#c9a84c] hover:text-[#b8943c] font-bold underline underline-offset-2 transition-colors"
+                      className="text-[#8a6a17] hover:text-[#6d5312] font-bold underline underline-offset-2 transition-colors"
                     >
                       אתר האישי שלי
                     </a>
@@ -593,7 +593,7 @@ export default function Home() {
                     href="https://www.facebook.com/eladjak1"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 bg-[#1877f2] text-white font-bold px-5 py-2.5 rounded-lg hover:bg-[#1565d8] transition-colors text-sm"
+                    className="inline-flex items-center gap-2 bg-[#1565d8] text-white font-bold px-5 py-2.5 rounded-lg hover:bg-[#0f4fae] transition-colors text-sm"
                   >
                     👤 פייסבוק
                   </a>
@@ -669,7 +669,7 @@ export default function Home() {
                 transition={{ duration: 0.4, delay: i * 0.1 }}
               >
                 <article className="bg-[#faf7f2] rounded-xl p-6 shadow-md h-full flex flex-col">
-                  <div className="text-[#c9a84c] text-3xl mb-3" aria-hidden="true">&ldquo;</div>
+                  <div className="text-[#8a6a17] text-3xl mb-3" aria-hidden="true">&ldquo;</div>
                   <p className="text-[#3d1f0d] leading-relaxed flex-1">{t.text}</p>
                   <footer className="mt-4 pt-4 border-t border-[#c9a84c]/20">
                     <p className="font-bold text-[#3d1f0d]">{t.name}</p>
@@ -686,12 +686,12 @@ export default function Home() {
       <section className="py-16 px-6 bg-[#c9a84c]">
         <div className="max-w-xl mx-auto text-center">
           <motion.div {...fadeInUp}>
-            <div className="text-white">
+            <div className="text-[#2c1810]">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <div className="text-7xl font-black drop-shadow">3</div>
                 <div className="text-right">
                   <div className="text-2xl font-bold">מקומות</div>
-                  <div className="text-white/80 text-sm">נותרו מתוך 10</div>
+                  <div className="text-[#2c1810]/80 text-sm">נותרו מתוך 10</div>
                 </div>
               </div>
               {/* Progress bar */}
@@ -699,7 +699,7 @@ export default function Home() {
                 <div className="bg-[#3d1f0d] h-3 rounded-full" style={{ width: "70%" }} />
               </div>
               <h2 className="font-black text-3xl md:text-4xl mb-4">המעגל כמעט מלא!</h2>
-              <p className="text-white/90 text-lg leading-relaxed mb-8 max-w-md mx-auto">
+              <p className="text-[#2c1810]/80 text-lg leading-relaxed mb-8 max-w-md mx-auto">
                 לצערי אין לנו מקום ללא הגבלה למעגל ולכן אני לא נוכל לקבל יותר מ-10
                 משתתפים. אם תצליח להכנס – מעולה, נעבוד ביחד!
               </p>
@@ -777,7 +777,7 @@ export default function Home() {
             href="https://www.eladjak.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#c9a84c]/50 hover:text-[#c9a84c] text-xs transition-colors"
+            className="text-[#c9a84c]/80 hover:text-[#c9a84c] text-xs transition-colors"
           >
             eladjak.com
           </a>
@@ -785,7 +785,7 @@ export default function Home() {
             href="https://www.facebook.com/eladjak1"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#c9a84c]/50 hover:text-[#c9a84c] text-xs transition-colors"
+            className="text-[#c9a84c]/80 hover:text-[#c9a84c] text-xs transition-colors"
           >
             Facebook
           </a>
@@ -793,12 +793,12 @@ export default function Home() {
             href="/cv-elad-yaakobovitch-he.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[#c9a84c]/50 hover:text-[#c9a84c] text-xs transition-colors"
+            className="text-[#c9a84c]/80 hover:text-[#c9a84c] text-xs transition-colors"
           >
             קורות חיים
           </a>
         </div>
-        <p className="text-[#c9a84c]/40 text-xs mt-2">מעגל גברים – מסע ללב הגבריות</p>
+        <p className="text-[#c9a84c]/80 text-xs mt-2">מעגל גברים – מסע ללב הגבריות</p>
       </footer>
     </main>
   );
