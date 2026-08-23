@@ -58,3 +58,26 @@ body {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
+/* ── Reduced-motion belt — keep this block LAST so it wins the cascade ──────
+   Backs up <MotionProvider> (which covers framer-motion) by also covering
+   CSS-driven motion: keyframes, transitions and smooth scrolling.
+
+   Deliberately does NOT blanket-reset transform/translate/scale/rotate. This
+   site uses -translate-x-1/2 for centering and scaleX(-1) for RTL-mirrored
+   arrows — those are layout, not motion, and resetting them displaces
+   centered elements and flips arrows the wrong way. If a specific element
+   animates via transform, reset it on that selector here. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+  html {
+    scroll-behavior: auto !important;
+  }
+}

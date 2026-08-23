@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Heebo } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+import { MotionProvider } from "@/components/MotionProvider";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 
 const heebo = Heebo({
@@ -187,7 +188,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${heebo.variable} font-heebo antialiased`}>
-        {children}
+        <MotionProvider>{children}</MotionProvider>
         <WhatsAppFloat />
         <Analytics />
       </body>

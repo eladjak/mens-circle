@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { aiGuard } from "@/lib/ai-guard"
 
 const SYSTEM_PROMPT = `אתה צ'אטבוט באתר מעגל הגברים של אלעד יעקובוביץ' (circle.eladjak.com), מבית אומנות הקשר.
 
@@ -71,6 +72,15 @@ export async function POST(req: Request) {
     }
   } catch {
     return NextResponse.json({ error: "invalid body" }, { status: 400 })
+  }
+
+  // Spend guard: this endpoint is public and unauthenticated, and Elad funds the
+  // Gemini key himself. Over either limit we serve the deterministic fallback
+  // rather than an error — the visitor still gets a real answer, it just doesn't
+  // cost anything. Checked after body validation so junk traffic can't burn budget.
+  const _guard = await aiGuard(req, "mens-circle");
+  if (!_guard.ok) {
+    return NextResponse.json({ content: "העוזר עמוס כרגע — אפשר לנסות שוב מאוחר יותר, או להשאיר פרטים בטופס ונחזור אליכם." });
   }
 
   const apiKey = process.env.GEMINI_API_KEY
