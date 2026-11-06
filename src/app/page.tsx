@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import FAQChat from "@/components/FAQChat";
 import SiteNav from "@/components/SiteNav";
 
@@ -887,6 +888,7 @@ export default function Home() {
             קורות חיים
           </a>
         </div>
+        <Link href="/blog" className="inline-flex min-h-11 items-center text-[#c9a84c] underline">מאמרים מהמעגל</Link>
         <p className="text-[#c9a84c]/80 text-xs mt-2">מעגל גברים – מסע ללב הגבריות</p>
       </footer>
     </main>

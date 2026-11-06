@@ -1,0 +1,22 @@
+bun test v1.4.4 (38afee6c8)
+
+tests/blog.test.ts:
+(pass) published only, no draft ids or other languages, sorted and deduplicated [5.15ms]
+Sanity blog unavailable 4 | export type Post={slug:string;title:string;excerpt:string;publishedAt:string;contentHtml:string;image?:string;author?:string};
+5 | const imageSafe=(s:unknown):s is string=>typeof s==='string' && /^https:\/\/cdn\.sanity\.io\/images\/b0hm1i34\/production\/[a-zA-Z0-9_-]+\.(jpg|jpeg|png|webp|avif)(\?[^#]*)?$/i.test(s);
+6 | const esc=(s:string)=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+7 | export function portableHtml(body:Parameters<typeof toHTML>[0]) {return sanitize(toHTML(body,{onMissingComponent:false,components:{types:{image:({value})=>imageSafe(value.assetUrl)?`<figure><img src="${esc(value.assetUrl)}" alt="${esc(value.alt||'')}"></figure>`:''}}}),{allowedTags:['p','br','h2','h3','h4','ul','ol','li','blockquote','strong','em','a','figure','img'],allowedAttributes:{a:['href','title'],img:['src','alt']},allowedSchemes:['http','https','mailto'],allowProtocolRelative:false});}
+8 | const query=`*[_type == "post" && siteId == "mens-circles" && status == "published" && !(_id in path("drafts.**")) && (language == "he" || !defined(language))]{_id,status,language,title,"slug":slug.current,excerpt,publishedAt,"body":body[]{...,"assetUrl":asset->url},"imageUrl":mainImage.asset->url,"author":author->name}`;
+9 | export async function getBlogData():Promise<{posts:Post[];unavailable:boolean}> {try {const r=await fetch(`https://b0hm1i34.api.sanity.io/v2024-01-01/data/query/production?query=${encodeURIComponent(query)}`,{next:{revalidate:300},signal:AbortSignal.timeout(5000)});if(!r.ok)throw new Error(`Sanity ${r.status}`);const {result}=await r.json();if(!Array.isArray(result))throw new Error('Invalid response');const map=new Map<string,Post>();for(const p of result){if(!p || typeof p._id!=='string' || p._id.startsWith('drafts.') || p.status!=='published' || (p.language||'he')!=='he' || typeof p.slug!=='string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(p.slug) || typeof p.title!=='string' || !p.title.trim() || typeof p.publishedAt!=='string' || Number.isNaN(Date.parse(p.publishedAt)) || !Array.isArray(p.body))continue;const contentHtml=portableHtml(p.body);if(!contentHtml.trim())continue;map.set(p.slug,{slug:p.slug,title:p.title,excerpt:typeof p.excerpt==='string'&&p.excerpt.trim()?p.excerpt:p.title,publishedAt:p.publishedA
+
+error: Invalid response
+      at getBlogData (/root/work/growth-blogs-20261106/audit-sources/mens-circle/src/lib/blog.ts:9:380)
+      at async <anonymous> (/root/work/growth-blogs-20261106/audit-sources/mens-circle/tests/blog.test.ts:4:92)
+
+(pass) malformed response yields unavailable state [0.46ms]
+(pass) grouped lists and safe JSON-LD image [1.58ms]
+
+ 3 pass
+ 0 fail
+ 7 expect() calls
+Ran 3 tests across 1 file. [50.00ms]

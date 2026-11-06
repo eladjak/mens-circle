@@ -1,0 +1,4 @@
+import {getBlogData,origin} from '@/lib/blog';
+export const revalidate=300;
+const xml=(s:string)=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&apos;');
+export async function GET(){const {posts,unavailable}=await getBlogData();if(unavailable)return new Response('Feed temporarily unavailable',{status:503});const items=posts.map(p=>`<item><title>${xml(p.title)}</title><link>${origin}/blog/${xml(p.slug)}</link><guid>${origin}/blog/${xml(p.slug)}</guid><description>${xml(p.excerpt)}</description><pubDate>${new Date(p.publishedAt).toUTCString()}</pubDate></item>`).join('');return new Response(`<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>מילים מהמעגל</title><link>${origin}/blog</link><description>מאמרים ממעגל הגברים</description><language>he</language>${items}</channel></rss>`,{headers:{'content-type':'application/rss+xml; charset=utf-8'}})}
